@@ -1,19 +1,21 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-# Create your models here.
-
-class User(AbstractUser):
-    is_organization = models.BooleanField(default=False)
-    is_individual = models.BooleanField(default=False)
+from userApp.models import User
+from phonenumber_field.modelfields import PhoneNumberField
 
 class IndividualProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='individual_profile')
     # Add fields specific to individual profiles here
+    address = models.TextField(null=True,blank=True)
+    phone = PhoneNumberField(null=True)
 
 class OrganizationProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='organization_profile')
     verified = models.BooleanField(default=False)
     # Add fields specific to organization profiles here
+    address = models.TextField(null=True,blank=True)
+    phone = PhoneNumberField(null=True)
+    website = models.URLField(null=True, blank=True)
+    
 
 class Location(models.Model):
     long = models.DecimalField(max_digits=9, decimal_places=6)

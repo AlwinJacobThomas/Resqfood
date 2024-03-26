@@ -1,13 +1,13 @@
 from django.urls import path,include
-from rest_framework import routers
 
+from .views import UserRegistration
 # REST API routes 
-router = routers.DefaultRouter() 
+
 
 app_name ='collectApp'
 
 urlpatterns = [
     # path('', index.views,name='index'),
-    path('api/', include(router.urls)),
-    
+   
+    path('register/',UserRegistration.as_view(),name='register')
 ]

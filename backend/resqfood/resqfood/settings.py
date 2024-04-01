@@ -43,11 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_rest_passwordreset',
     'phonenumber_field',
     'knox',
     'collectApp',
     'userApp',
 ]
+
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -140,3 +143,14 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "userApp.User"
+
+
+# Email Backend Configuration
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')  # Replace with your preferred backend
+
+
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")  # Set to False if your email server doesn't use TLS
+EMAIL_PORT = os.environ.get("EMAIL_PORT")#Replace with your email port
+EMAIL_HOST = os.environ.get("EMAIL_HOST")# Replace with your email host for gmail -> 'smtp.gmail.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')  # Replace with your email username
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')  # Replace with your email password

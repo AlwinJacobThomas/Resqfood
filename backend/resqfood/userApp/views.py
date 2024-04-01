@@ -9,9 +9,18 @@ from .serializers import UserRegistrationSerializer,ChangePasswordSerializer
 from knox.models import AuthToken
 from knox.views import LoginView as KnoxLoginView
 
+
+# email otp
+from django.core.mail import EmailMultiAlternatives
+from django.dispatch import receiver
+from django.template.loader import render_to_string
+from django.urls import reverse
+from django_rest_passwordreset.signals import reset_password_token_created
+
+import os
+from dotenv import load_dotenv #pip install python-dotenv
+load_dotenv()
 # Create your views here.
-
-
 class UserRegistration(APIView):    
     serializer_class = UserRegistrationSerializer
     
@@ -68,4 +77,6 @@ class ChangePassword(generics.UpdateAPIView):
             return Response(response)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST) 
             
-change_password = ChangePassword.as_view()      
+change_password = ChangePassword.as_view()     
+
+
